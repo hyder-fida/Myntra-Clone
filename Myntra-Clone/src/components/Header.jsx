@@ -2,8 +2,16 @@ import { IoIosPerson } from "react-icons/io";
 import { FaRegFaceGrinHearts } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const bag = useSelector(store => store.bag);
+
+  const handleSearchItem = (event) => {
+    setSearchQuery(event.target.value); // Update search query state
+  }
+
+
   return (
     <div>
          <header>
@@ -19,7 +27,7 @@ const Header = () => {
             <a href="#">Studio <sup>New</sup></a>
         </nav>
         <div className="search_bar">
-            <input className="search_input" placeholder="Search for products, brands and more" />
+            <input className="search_input" placeholder="Search for products, brands and more" onChange={handleSearchItem}/>
         </div>
         <div className="action_bar">
             <div className="action_container">
@@ -35,7 +43,7 @@ const Header = () => {
             <Link className="action_container" to="/bag">
               <FaShoppingBag/>
                 <span className="action_name">Bag</span>
-                <span className="bag-item-count">0</span>
+                <span className="bag-item-count">{bag.length}</span>
             </Link>
         </div>
     </header>
